@@ -13,7 +13,6 @@
             line-height: 1.6;
         }
         
-        /* 顶部简洁标题栏 */
         .header {
             background: #fff;
             border-bottom: 1px solid #e2e8f0;
@@ -46,97 +45,99 @@
             margin: 0 10px;
         }
         
-        /* 主要内容区 */
         .main-container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 30px 20px;
         }
         
-        /* AI对话区域 - 全宽大卡片 */
+        /* 修正：AI对话区改为操作面板 */
         .ai-section {
-            background: #fff;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 25px;
             margin-bottom: 30px;
-            overflow: hidden;
+            color: white;
         }
         .ai-header {
-            background: #f1f5f9;
-            padding: 15px 20px;
-            border-bottom: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 15px;
         }
         .ai-icon {
-            width: 32px;
-            height: 32px;
-            background: #3b82f6;
-            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 16px;
+            font-size: 20px;
         }
         .ai-title {
             font-weight: 600;
-            color: #0f172a;
-            font-size: 16px;
+            font-size: 18px;
         }
         .ai-subtitle {
-            color: #64748b;
-            font-size: 13px;
-            margin-left: auto;
-        }
-        
-        /* 扣子聊天容器 - 内嵌模式 */
-        #coze-chat-container {
-            height: 500px;
-            width: 100%;
-            background: #f8fafc;
-            position: relative;
-        }
-        
-        /* SDK加载状态提示 */
-        .sdk-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #64748b;
             font-size: 14px;
+            opacity: 0.9;
+            margin-top: 2px;
         }
         
-        /* 快捷问题栏 */
-        .quick-bar {
-            padding: 12px 20px;
-            background: #fafafa;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
+        /* 快捷按钮网格 */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
+            margin-top: 15px;
         }
-        .quick-btn {
-            padding: 6px 14px;
-            background: #fff;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 13px;
-            color: #475569;
+        .quick-card {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 15px;
             cursor: pointer;
             transition: all 0.2s;
+            text-align: left;
+            color: white;
+            backdrop-filter: blur(10px);
         }
-        .quick-btn:hover {
-            background: #dbeafe;
-            border-color: #3b82f6;
-            color: #1d4ed8;
+        .quick-card:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        .quick-card strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        .quick-card span {
+            font-size: 13px;
+            opacity: 0.9;
         }
         
-        /* 个人简介卡片 */
+        /* 手动打开按钮 */
+        .chat-trigger-btn {
+            background: white;
+            color: #1d4ed8;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .chat-trigger-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* 个人简介双栏 */
         .profile-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -145,6 +146,7 @@
         }
         @media (max-width: 768px) {
             .profile-grid { grid-template-columns: 1fr; }
+            .quick-grid { grid-template-columns: 1fr; }
         }
         
         .info-card {
@@ -171,7 +173,6 @@
             font-weight: 600;
         }
         
-        /* 项目经历 */
         .section-title {
             font-size: 18px;
             color: #0f172a;
@@ -223,7 +224,6 @@
             font-size: 13px;
         }
         
-        /* 技能标签 - 简洁版 */
         .skills-bar {
             display: flex;
             gap: 8px;
@@ -239,7 +239,6 @@
             border: 1px solid #e2e8f0;
         }
         
-        /* 页脚 */
         .footer {
             text-align: center;
             color: #94a3b8;
@@ -270,29 +269,42 @@
 
     <div class="main-container">
         
-        <!-- AI对话区 - 置顶全宽 -->
+        <!-- 修正：AI交互区 -->
         <div class="ai-section">
             <div class="ai-header">
-                <div class="ai-icon">💬</div>
+                <div class="ai-icon">🤖</div>
                 <div>
-                    <div class="ai-title">专业咨询窗口</div>
+                    <div class="ai-title">AI专业助手</div>
+                    <div class="ai-subtitle">基于扣子Coze平台 | 免登录直接对话</div>
                 </div>
-                <div class="ai-subtitle">基于Coze AI助手（免登录）</div>
+            </div>
+            <p style="margin-bottom: 10px;">点击下方快速提问，或打开完整对话窗口进行咨询：</p>
+            
+            <div class="quick-grid">
+                <div class="quick-card" onclick="openChatAndAsk('AutoLISP自动标注系统如何提升300%效率？')">
+                    <strong>🛠️ AutoLISP开发</strong>
+                    <span>CAD二次开发技术细节</span>
+                </div>
+                <div class="quick-card" onclick="openChatAndAsk('8-Skill技术标自动化系统的工作原理？')">
+                    <strong>⚙️ 8-Skill架构</strong>
+                    <span>工作流编排方法论</span>
+                </div>
+                <div class="quick-card" onclick="openChatAndAsk('工程知识库RAG系统如何管理2TB资料？')">
+                    <strong>📚 RAG知识库</strong>
+                    <span>企业知识管理方案</span>
+                </div>
+                <div class="quick-card" onclick="openChatAndAsk('10年工程经验如何转型AI产品经理？')">
+                    <strong>🚀 转型咨询</strong>
+                    <span>职业发展路径建议</span>
+                </div>
             </div>
             
-            <!-- 扣子聊天窗口容器（内嵌模式） -->
-            <div id="coze-chat-container">
-                <div class="sdk-loading">正在加载AI助手...</div>
-            </div>
-            
-            <!-- 快捷问题 -->
-            <div class="quick-bar">
-                <span style="color:#64748b; font-size:13px; margin-right:5px;">快速提问：</span>
-                <button class="quick-btn" onclick="askAgent('AutoLISP自动标注系统如何提升300%效率？')">AutoLISP开发</button>
-                <button class="quick-btn" onclick="askAgent('8-Skill技术标自动化系统的8个原子能力是什么？')">8-Skill架构</button>
-                <button class="quick-btn" onclick="askAgent('工程知识库RAG系统如何管理2TB资料？')">RAG知识库</button>
-                <button class="quick-btn" onclick="askAgent('10年工程经验如何转型AI产品经理？')">转型优势</button>
-            </div>
+            <button class="chat-trigger-btn" onclick="openChat()">
+                <span>💬</span> 打开AI对话窗口
+            </button>
+            <p style="font-size: 12px; opacity: 0.8; margin-top: 10px;">
+                💡 提示：页面右下角也有悬浮按钮可随时打开对话
+            </p>
         </div>
 
         <!-- 个人简介双栏 -->
@@ -372,96 +384,91 @@
         </div>
     </div>
 
-    <!-- 扣子 Coze Chat SDK - 修正版 -->
+    <!-- 扣子 Coze Chat SDK - 标准悬浮球模式 -->
     <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
     <script>
-        // 注意：PAT Token在浏览器端使用存在安全风险（可能被窃取额度）
-        // 生产环境建议使用 OAuth JWT 或后端代理，参考：https://www.coze.cn/open/docs/developer_guides/authentication
         const COZE_PAT = 'pat_Lh4K8fX0KbxgpZJquLRV5saE5CFJfn6zHP3JEtDZ9IEHE5CPEHi2ml5qyVBBdmpg';
         const COZE_BOT_ID = '7600983682157101099';
         
-        let cozeClient = null;
+        let client = null;
         
-        // 初始化扣子内嵌聊天窗口
+        // 初始化Chat SDK（标准方式）
         try {
-            cozeClient = new CozeWebSDK.WebChatClient({
+            client = new CozeWebSDK.WebChatClient({
                 config: {
                     bot_id: COZE_BOT_ID,
                 },
                 componentProps: {
                     title: '高棣AI助手',
-                    icon: '💬',
+                    icon: 'https://img.icons8.com/color/96/engineer.png', // 可选：自定义图标
                     lang: 'zh-CN',
-                    layout: 'pc',          // 指定PC布局，确保内嵌显示正常
-                    width: '100%',         // 填满容器
-                    height: '100%',        // 填满容器
-                    canFloat: false,       // 关闭悬浮按钮（纯内嵌模式）
-                    canMini: false,        // 关闭最小化按钮
-                    allowUpload: false,    // 可根据需要开启文件上传
                 },
                 auth: {
                     type: 'token',
                     token: COZE_PAT,
-                    // 刷新token的回调，返回新的PAT或Promise
                     onRefreshToken: function() {
                         return COZE_PAT;
                     }
                 },
-                el: '#coze-chat-container', // 关键：指定挂载容器
                 ui: {
                     base: {
-                        zIndex: 10,
+                        zIndex: 1000,
+                        width: 600,        // PC端窗口宽度
+                        height: 800,       // PC端窗口高度
+                    },
+                    asstBtn: {
+                        // 悬浮球配置（这是官方支持的唯一入口方式）
+                        isNeed: true,      // 显示悬浮球（默认）
+                        position: 'right', // 右下角
+                        size: 50,          // 大小
+                    },
+                    footer: {
+                        // 底部文案
+                        isShow: true,
+                        text: 'Powered by Coze',
                     }
                 },
-                // 事件监听
-                onSuccess: function() {
-                    console.log('Coze SDK 加载成功');
-                    // 隐藏加载提示
-                    const loading = document.querySelector('.sdk-loading');
-                    if (loading) loading.style.display = 'none';
-                },
-                onError: function(error) {
-                    console.error('Coze SDK 错误:', error);
-                    const container = document.getElementById('coze-chat-container');
-                    if (container) {
-                        container.innerHTML = '<div style="padding:20px; color:#64748b; text-align:center;">加载失败，请刷新页面重试<br><small style="font-size:12px; color:#94a3b8;">可能是Token过期或网络问题</small></div>';
-                    }
-                }
             });
+            
+            console.log('Coze SDK 初始化成功');
         } catch (error) {
             console.error('SDK初始化失败:', error);
         }
-
-        // 快捷提问功能 - 修正版
-        function askAgent(question) {
-            if (!cozeClient) {
-                alert('AI助手尚未加载完成，请稍后再试');
-                return;
+        
+        // 打开聊天窗口（如果SDK支持open方法）
+        function openChat() {
+            if (client && typeof client.open === 'function') {
+                client.open();
+            } else {
+                // 如果不支持API打开，提示用户点击右下角悬浮球
+                alert('请点击页面右下角的蓝色悬浮球图标开始对话');
             }
-            
-            // 确保聊天窗口已渲染
-            try {
-                // 方式1：使用sendMessage直接发送（SDK 1.2.0+支持）
-                if (typeof cozeClient.sendMessage === 'function') {
-                    cozeClient.sendMessage({
-                        text: question
-                    });
-                } else {
-                    // 方式2：降级方案 - 复制到剪贴板并提示用户粘贴
-                    // 在新版SDK中如果直接sendMessage不可用，则提示用户
+        }
+        
+        // 打开并发送问题
+        function openChatAndAsk(question) {
+            if (client) {
+                // 先打开窗口
+                if (typeof client.open === 'function') {
+                    client.open();
+                }
+                
+                // 尝试发送消息（如果SDK支持）
+                // 注意：官方SDK可能没有暴露直接发送消息的API给外部调用
+                // 如果不支持，我们复制问题到剪贴板提示用户粘贴
+                setTimeout(function() {
                     if (navigator.clipboard && window.isSecureContext) {
                         navigator.clipboard.writeText(question).then(function() {
-                            alert('问题已复制到剪贴板，请粘贴到下方对话框发送：\n\n' + question);
+                            alert('问题已复制，请在打开的对话框中粘贴发送：\n\n' + question);
                         }).catch(function() {
-                            prompt('请复制以下问题粘贴发送：', question);
+                            alert('请复制以下问题发送：\n' + question);
                         });
                     } else {
-                        prompt('请复制以下问题粘贴发送：', question);
+                        alert('请复制以下问题发送：\n' + question);
                     }
-                }
-            } catch (error) {
-                console.error('发送消息失败:', error);
-                prompt('请复制以下问题手动发送：', question);
+                }, 500);
+            } else {
+                alert('AI助手加载中，请刷新页面重试');
             }
         }
     </script>

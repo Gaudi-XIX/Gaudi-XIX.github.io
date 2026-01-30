@@ -9,10 +9,11 @@
         body {
             background: #f8fafc;
             color: #1e293b;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
             line-height: 1.6;
         }
         
+        /* 顶部简洁标题栏 */
         .header {
             background: #fff;
             border-bottom: 1px solid #e2e8f0;
@@ -39,17 +40,20 @@
             color: #64748b;
             font-size: 14px;
             margin-top: 8px;
+            font-weight: 500;
         }
         .contact-top span {
             margin: 0 10px;
         }
         
+        /* 主要内容区 */
         .main-container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 30px 20px;
         }
         
+        /* AI对话区域 - 全宽大卡片 */
         .ai-section {
             background: #fff;
             border-radius: 12px;
@@ -88,14 +92,25 @@
             margin-left: auto;
         }
         
-        /* 关键：给容器明确的尺寸，否则SDK可能渲染异常 */
+        /* 扣子聊天容器 - 内嵌模式 */
         #coze-chat-container {
             height: 500px;
             width: 100%;
-            background: #fff;
+            background: #f8fafc;
             position: relative;
         }
         
+        /* SDK加载状态提示 */
+        .sdk-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        /* 快捷问题栏 */
         .quick-bar {
             padding: 12px 20px;
             background: #fafafa;
@@ -116,10 +131,12 @@
             transition: all 0.2s;
         }
         .quick-btn:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
+            background: #dbeafe;
+            border-color: #3b82f6;
+            color: #1d4ed8;
         }
         
+        /* 个人简介卡片 */
         .profile-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -128,7 +145,6 @@
         }
         @media (max-width: 768px) {
             .profile-grid { grid-template-columns: 1fr; }
-            #coze-chat-container { height: 400px; }
         }
         
         .info-card {
@@ -155,6 +171,7 @@
             font-weight: 600;
         }
         
+        /* 项目经历 */
         .section-title {
             font-size: 18px;
             color: #0f172a;
@@ -206,6 +223,7 @@
             font-size: 13px;
         }
         
+        /* 技能标签 - 简洁版 */
         .skills-bar {
             display: flex;
             gap: 8px;
@@ -221,6 +239,7 @@
             border: 1px solid #e2e8f0;
         }
         
+        /* 页脚 */
         .footer {
             text-align: center;
             color: #94a3b8;
@@ -233,6 +252,7 @@
 </head>
 <body>
 
+    <!-- 顶部标题栏 -->
     <div class="header">
         <div class="header-content">
             <h1>高棣</h1>
@@ -250,27 +270,32 @@
 
     <div class="main-container">
         
+        <!-- AI对话区 - 置顶全宽 -->
         <div class="ai-section">
             <div class="ai-header">
                 <div class="ai-icon">💬</div>
                 <div>
                     <div class="ai-title">专业咨询窗口</div>
                 </div>
-                <div class="ai-subtitle" id="chat-status">初始化中...</div>
+                <div class="ai-subtitle">基于Coze AI助手（免登录）</div>
             </div>
             
-            <!-- SDK 挂载点 -->
-            <div id="coze-chat-container"></div>
+            <!-- 扣子聊天窗口容器（内嵌模式） -->
+            <div id="coze-chat-container">
+                <div class="sdk-loading">正在加载AI助手...</div>
+            </div>
             
+            <!-- 快捷问题 -->
             <div class="quick-bar">
-                <span style="color:#64748b; font-size:13px;">快速提问：</span>
-                <button class="quick-btn" onclick="sendQuickQuestion('AutoLISP自动标注系统如何提升300%效率？')">AutoLISP开发</button>
-                <button class="quick-btn" onclick="sendQuickQuestion('8-Skill技术标自动化系统的8个原子能力是什么？')">8-Skill架构</button>
-                <button class="quick-btn" onclick="sendQuickQuestion('工程知识库RAG系统如何管理2TB资料？')">RAG知识库</button>
-                <button class="quick-btn" onclick="sendQuickQuestion('10年工程经验如何转型AI产品经理？')">转型优势</button>
+                <span style="color:#64748b; font-size:13px; margin-right:5px;">快速提问：</span>
+                <button class="quick-btn" onclick="askAgent('AutoLISP自动标注系统如何提升300%效率？')">AutoLISP开发</button>
+                <button class="quick-btn" onclick="askAgent('8-Skill技术标自动化系统的8个原子能力是什么？')">8-Skill架构</button>
+                <button class="quick-btn" onclick="askAgent('工程知识库RAG系统如何管理2TB资料？')">RAG知识库</button>
+                <button class="quick-btn" onclick="askAgent('10年工程经验如何转型AI产品经理？')">转型优势</button>
             </div>
         </div>
 
+        <!-- 个人简介双栏 -->
         <div class="profile-grid">
             <div class="info-card">
                 <div class="card-title">核心能力</div>
@@ -278,6 +303,7 @@
                     <p><span class="highlight">复杂工作流编排：</span>8-Skill系统，百万字级技术标自动化</p>
                     <p style="margin-top:8px;"><span class="highlight">CAD二次开发：</span>AutoLISP自动标注，效率提升300%</p>
                     <p style="margin-top:8px;"><span class="highlight">知识管理：</span>2TB工程资料RAG系统，100%复用率</p>
+                    
                     <div class="skills-bar" style="margin-top:12px;">
                         <span class="skill-item">Coze</span>
                         <span class="skill-item">AutoLISP</span>
@@ -300,6 +326,7 @@
             </div>
         </div>
 
+        <!-- 项目经历 -->
         <div class="section-title">主要项目成果</div>
         <div class="project-list">
             <div class="project-item">
@@ -307,7 +334,7 @@
                     <div class="project-name">AutoCAD自动标注系统</div>
                     <span class="project-tag">效率提升300%</span>
                 </div>
-                <div class="project-desc">OpenCode辅助开发的AutoLISP插件，实现道路设计图纸自动标注（桩号、高程、横断面）。被3家设计院采纳，年释放设计成本10万+。</div>
+                <div class="project-desc">OpenCode辅助开发的AutoLISP插件，实现道路设计图纸自动标注（桩号、高程、横断面）。被3家设计院采纳，年释放设计成本10万+，技术文档获专业论坛2万浏览。</div>
                 <div class="project-meta">技术栈：AutoLISP | OpenCode | 道路设计自动化</div>
             </div>
             
@@ -316,7 +343,7 @@
                     <div class="project-name">8-Skill技术标自动化系统</div>
                     <span class="project-tag">工作流编排</span>
                 </div>
-                <div class="project-desc">基于Cowork+Python搭建的复杂工作流架构，将市政道路技术标编制拆解为8个标准化原子能力，建立"必须/应/宜"三级Prompt约束规则。</div>
+                <div class="project-desc">基于Cowork+Python搭建的复杂工作流架构，将市政道路技术标编制拆解为8个标准化原子能力（招标文件解构→技术要点解析→多文档生成等），建立"必须/应/宜"三级Prompt约束规则。</div>
                 <div class="project-meta">技术栈：Coze | Python | Prompt工程 | 标准化输出</div>
             </div>
             
@@ -345,114 +372,96 @@
         </div>
     </div>
 
-    <!-- SDK - 使用与官方示例匹配的版本 -->
-    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
+    <!-- 扣子 Coze Chat SDK - 修正版 -->
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
     <script>
-        let client = null;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initChat();
-        });
-
-        function initChat() {
-            try {
-                // 检查 SDK
-                if (typeof CozeWebSDK === 'undefined') {
-                    throw new Error('SDK 未加载');
-                }
-
-                // 关键修正：使用官方配置结构
-                client = new CozeWebSDK.WebChatClient({
-                    config: {
-                        type: 'bot',           // 明确指定类型
-                        bot_id: '7600983682157101099',
-                        isIframe: false,       // 关闭 iframe 模式才能内嵌
-                    },
-                    auth: {
-                        type: 'token',
-                        token: 'pat_Lh4K8fX0KbxgpZJquLRV5saE5CFJfn6zHP3JEtDZ9IEHE5CPEHi2ml5qyVBBdmpg',
-                        onRefreshToken: async () => {
-                            return 'pat_Lh4K8fX0KbxgpZJquLRV5saE5CFJfn6zHP3JEtDZ9IEHE5CPEHi2ml5qyVBBdmpg';
-                        }
-                    },
-                    userInfo: {
-                        id: 'visitor_' + Date.now(),  // 随机用户ID避免冲突
-                        url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
-                        nickname: '访客',
-                    },
-                    ui: {
-                        base: {
-                            icon: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/chatsdk-logo.png',
-                            layout: 'pc',
-                            lang: 'zh-CN',      // 中文
-                            zIndex: 1000
-                        },
-                        header: {
-                            isShow: true,
-                            isNeedClose: false,  // 内嵌模式不需要关闭按钮
-                        },
-                        asstBtn: {
-                            isNeed: false        // 不需要悬浮按钮（完全内嵌）
-                        },
-                        footer: {
-                            isShow: false,       // 隐藏底部文案更简洁
-                        },
-                        // 关键：el 要放在 chatBot 配置里，且传入 DOM 元素或选择器
-                        chatBot: {
-                            title: '高棣AI助手',
-                            uploadable: false,   // 如果不需要上传功能可以关闭
-                            width: '100%',       // 填满容器
-                            el: document.getElementById('coze-chat-container'),  // 直接传 DOM 元素更可靠
-                        },
-                    },
-                });
-
-                document.getElementById('chat-status').textContent = '免登录对话';
-                console.log('Coze 初始化成功');
-
-            } catch (error) {
-                console.error('初始化失败:', error);
-                document.getElementById('chat-status').textContent = '加载失败';
-                document.getElementById('chat-status').style.color = '#ef4444';
-                document.getElementById('coze-chat-container').innerHTML = 
-                    '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;">对话窗口加载失败，请刷新页面重试</div>';
-            }
-        }
-
-        // 发送快捷问题
-        function sendQuickQuestion(question) {
-            if (!client) {
-                alert('对话窗口正在初始化，请稍后再试');
-                return;
-            }
-
-            try {
-                // 新版 SDK 可能需要在 chatBot 实例上调用
-                if (client.chatBot && client.chatBot.sendMessage) {
-                    client.chatBot.sendMessage(question);
-                } else if (client.sendMessage) {
-                    client.sendMessage(question);
-                } else {
-                    // 查找 textarea 并设置值（降级方案）
-                    const textarea = document.querySelector('#coze-chat-container textarea, #coze-chat-container input');
-                    if (textarea) {
-                        textarea.value = question;
-                        textarea.focus();
-                        // 尝试触发回车
-                        const event = new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13 });
-                        textarea.dispatchEvent(event);
-                    } else {
-                        // 复制到剪贴板提示用户
-                        navigator.clipboard.writeText(question).then(() => {
-                            alert('问题已复制，请粘贴到对话框中：' + question);
-                        }).catch(() => {
-                            alert('请手动复制问题：' + question);
-                        });
+        // 注意：PAT Token在浏览器端使用存在安全风险（可能被窃取额度）
+        // 生产环境建议使用 OAuth JWT 或后端代理，参考：https://www.coze.cn/open/docs/developer_guides/authentication
+        const COZE_PAT = 'pat_Lh4K8fX0KbxgpZJquLRV5saE5CFJfn6zHP3JEtDZ9IEHE5CPEHi2ml5qyVBBdmpg';
+        const COZE_BOT_ID = '7600983682157101099';
+        
+        let cozeClient = null;
+        
+        // 初始化扣子内嵌聊天窗口
+        try {
+            cozeClient = new CozeWebSDK.WebChatClient({
+                config: {
+                    bot_id: COZE_BOT_ID,
+                },
+                componentProps: {
+                    title: '高棣AI助手',
+                    icon: '💬',
+                    lang: 'zh-CN',
+                    layout: 'pc',          // 指定PC布局，确保内嵌显示正常
+                    width: '100%',         // 填满容器
+                    height: '100%',        // 填满容器
+                    canFloat: false,       // 关闭悬浮按钮（纯内嵌模式）
+                    canMini: false,        // 关闭最小化按钮
+                    allowUpload: false,    // 可根据需要开启文件上传
+                },
+                auth: {
+                    type: 'token',
+                    token: COZE_PAT,
+                    // 刷新token的回调，返回新的PAT或Promise
+                    onRefreshToken: function() {
+                        return COZE_PAT;
+                    }
+                },
+                el: '#coze-chat-container', // 关键：指定挂载容器
+                ui: {
+                    base: {
+                        zIndex: 10,
+                    }
+                },
+                // 事件监听
+                onSuccess: function() {
+                    console.log('Coze SDK 加载成功');
+                    // 隐藏加载提示
+                    const loading = document.querySelector('.sdk-loading');
+                    if (loading) loading.style.display = 'none';
+                },
+                onError: function(error) {
+                    console.error('Coze SDK 错误:', error);
+                    const container = document.getElementById('coze-chat-container');
+                    if (container) {
+                        container.innerHTML = '<div style="padding:20px; color:#64748b; text-align:center;">加载失败，请刷新页面重试<br><small style="font-size:12px; color:#94a3b8;">可能是Token过期或网络问题</small></div>';
                     }
                 }
-            } catch (e) {
-                console.error('发送失败:', e);
-                alert('请点击输入框手动输入：' + question);
+            });
+        } catch (error) {
+            console.error('SDK初始化失败:', error);
+        }
+
+        // 快捷提问功能 - 修正版
+        function askAgent(question) {
+            if (!cozeClient) {
+                alert('AI助手尚未加载完成，请稍后再试');
+                return;
+            }
+            
+            // 确保聊天窗口已渲染
+            try {
+                // 方式1：使用sendMessage直接发送（SDK 1.2.0+支持）
+                if (typeof cozeClient.sendMessage === 'function') {
+                    cozeClient.sendMessage({
+                        text: question
+                    });
+                } else {
+                    // 方式2：降级方案 - 复制到剪贴板并提示用户粘贴
+                    // 在新版SDK中如果直接sendMessage不可用，则提示用户
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(question).then(function() {
+                            alert('问题已复制到剪贴板，请粘贴到下方对话框发送：\n\n' + question);
+                        }).catch(function() {
+                            prompt('请复制以下问题粘贴发送：', question);
+                        });
+                    } else {
+                        prompt('请复制以下问题粘贴发送：', question);
+                    }
+                }
+            } catch (error) {
+                console.error('发送消息失败:', error);
+                prompt('请复制以下问题手动发送：', question);
             }
         }
     </script>

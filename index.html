@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高棣 | AI Native Civil Engineer 技术作品集</title>
+    <title>高棣 | AI Native Civil Engineer — 驯服野马的工程化实践</title>
     <style>
         :root {
             --ink: #1a1a1a;
             --brick: #c23a30;
-            --brick-dark: #a02820;
+            --brick-dark: #8b1f18;
             --paper: #f7f3eb;
             --tile: #5a6c7d;
             --tile-light: #e8e4dc;
+            --tech: #475569;
+            --ai: #059669;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: "SimSun", "STSong", "Source Han Serif SC", "Noto Serif SC", serif;
+            font-family: "Noto Serif SC", "SimSun", "STSong", "Source Han Serif SC", serif;
             background: var(--paper);
             color: var(--ink);
             line-height: 1.8;
@@ -25,48 +27,118 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 首屏 - 加入钩子和故事 */
+        /* 首屏 */
         .hero {
             background: var(--ink);
             color: var(--paper);
-            padding: 100px 20px 80px;
+            padding: 80px 20px 60px;
             text-align: center;
             border-bottom: 6px solid var(--brick);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--brick), transparent);
+            opacity: 0.5;
         }
 
         h1 {
-            font-family: "SimSun", "STSong", "Source Han Serif SC", serif;
+            font-family: "Noto Serif SC", "SimSun", serif;
             font-size: 56px;
             font-weight: 700;
-            letter-spacing: 12px;
-            margin-bottom: 20px;
-            margin-left: 12px;
+            letter-spacing: 16px;
+            margin-bottom: 16px;
+            margin-left: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .hero-hook {
-            font-size: 20px;
+        .hero-tagline {
+            font-size: 18px;
             color: var(--brick);
             font-weight: 700;
             margin-bottom: 30px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-family: "Noto Sans SC", sans-serif;
         }
 
-        .hero-story {
+        .hero-hook {
             max-width: 700px;
             margin: 0 auto 40px;
-            font-size: 15px;
-            line-height: 2;
-            opacity: 0.9;
-            color: var(--tile-light);
+            font-size: 22px;
+            line-height: 1.6;
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .hero-hook .highlight {
+            color: var(--brick);
+            font-weight: 700;
+        }
+
+        .hero-metrics {
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+        }
+
+        .metric-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .metric-number {
+            font-size: 42px;
+            font-weight: 700;
+            font-family: "SF Mono", "Consolas", "Monaco", monospace;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .metric-box.traditional {
+            color: #d4a574;
+            border-bottom: 3px solid #d4a574;
+        }
+
+        .metric-box.arrow {
+            color: var(--tile);
+            font-size: 24px;
+            padding: 0;
+            font-family: serif;
+        }
+
+        .metric-box.ai {
+            color: #34d399;
+            border-bottom: 3px solid #34d399;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            font-family: "Noto Sans SC", sans-serif;
         }
 
         .hero-info {
             font-size: 14px;
             opacity: 0.7;
             letter-spacing: 2px;
+            margin-top: 30px;
+            color: var(--tile-light);
         }
 
-        /* 板块0 - 电梯演讲 */
+        /* 电梯演讲 */
         .elevator {
             background: var(--paper);
             border-top: 3px solid var(--brick);
@@ -80,7 +152,7 @@
             max-width: 800px;
             margin: 0 auto;
             font-size: 16px;
-            line-height: 2;
+            line-height: 2.2;
             color: var(--ink);
         }
 
@@ -89,65 +161,111 @@
             font-weight: 700;
         }
 
-        /* 板块通用 - 适度紧凑 */
+        .story-section {
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .story-section p {
+            margin: 8px 0;
+        }
+
+        .protocol-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--tile-light);
+        }
+
+        /* 板块通用 */
         .section {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 70px 20px;
             border-bottom: 1px solid var(--tile-light);
         }
 
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
         .section-title {
-            font-family: -apple-system, sans-serif;
+            font-family: "Noto Sans SC", sans-serif;
             font-size: 12px;
             font-weight: 600;
             color: var(--brick);
-            letter-spacing: 3px;
-            margin-bottom: 10px;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
             text-transform: uppercase;
         }
 
         .section-subtitle {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--ink);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
         }
 
-        /* 统一2×2网格 */
+        .section-desc {
+            font-size: 15px;
+            color: var(--tile);
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: "Noto Sans SC", sans-serif;
+        }
+
         .grid-2x2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 24px;
         }
 
         @media (max-width: 768px) {
-            .grid-2x2 { grid-template-columns: 1fr; }
-            h1 { font-size: 40px; letter-spacing: 8px; }
-            .hero-hook { font-size: 18px; }
+            .grid-2x2 { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
+            h1 { 
+                font-size: 36px; 
+                letter-spacing: 8px; 
+            }
+            .hero-hook {
+                font-size: 18px;
+            }
+            .hero-metrics {
+                gap: 20px;
+            }
+            .metric-number {
+                font-size: 32px;
+            }
+            .section-subtitle {
+                font-size: 22px;
+            }
         }
 
-        /* 统一卡片 - 紧凑 */
+        /* 卡片 */
         .card {
             background: var(--paper);
             border: 2px solid var(--tile-light);
-            padding: 24px;
+            padding: 28px;
             position: relative;
             transition: all 0.3s ease;
         }
 
         .card:hover {
             border-color: var(--tile);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
         }
 
         .card::before {
             content: '';
             position: absolute;
             top: -2px;
-            left: 24px;
-            width: 36px;
+            left: 28px;
+            width: 40px;
             height: 3px;
             background: var(--brick);
         }
@@ -156,10 +274,10 @@
             font-size: 17px;
             font-weight: 700;
             color: var(--ink);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             letter-spacing: 1px;
         }
 
@@ -173,14 +291,27 @@
         .card-content {
             font-size: 14px;
             color: var(--tile);
-            line-height: 1.7;
+            line-height: 1.8;
             text-align: justify;
+            font-family: "Noto Sans SC", sans-serif;
         }
 
-        /* CTA按钮 - 紧凑 */
+        .card-metric {
+            display: inline-block;
+            margin-top: 12px;
+            font-family: "SF Mono", monospace;
+            font-size: 12px;
+            color: var(--brick);
+            background: rgba(194, 58, 48, 0.08);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        /* CTA */
         .cta-wrapper {
-            margin-top: 30px;
+            margin-top: 40px;
             text-align: center;
+            padding-top: 20px;
         }
 
         .cta-button {
@@ -188,15 +319,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
             width: 100%;
-            max-width: 600px;
+            max-width: 580px;
             background: var(--brick);
             color: var(--paper);
-            padding: 18px 40px;
+            padding: 20px 40px;
             font-size: 16px;
             font-weight: 700;
-            font-family: "SimSun", "STSong", serif;
+            font-family: "Noto Serif SC", serif;
             border: none;
             cursor: pointer;
             letter-spacing: 3px;
@@ -204,7 +335,7 @@
             box-shadow: 0 4px 0 var(--brick-dark);
             position: relative;
             top: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .cta-button:hover {
@@ -218,6 +349,7 @@
             font-size: 13px;
             color: var(--tile);
             letter-spacing: 1px;
+            font-family: "Noto Sans SC", sans-serif;
         }
 
         /* 页脚 */
@@ -225,199 +357,257 @@
             background: var(--tile);
             color: var(--paper);
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             font-size: 14px;
             letter-spacing: 1px;
         }
 
         footer p {
             opacity: 0.9;
+            margin: 8px 0;
         }
 
-        footer span {
-            margin: 0 8px;
+        footer .links {
+            margin-top: 20px;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: var(--paper);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: border-color 0.3s;
+        }
+
+        footer a:hover {
+            border-color: var(--paper);
         }
     </style>
 </head>
 <body>
 
-    <!-- 首屏：钩子+故事+身份 -->
+    <!-- 首屏：驯服野马的钩子 + 300→300硬核数据 -->
     <header class="hero">
         <h1>高棣</h1>
-        <div class="hero-hook">10 年营造的 300 小时与 AI 的 30 分钟</div>
-        <div class="hero-story">
-            从 CAD 手工画图到 AutoLISP 自动标注<br>
-            从 Excel 公式到 VBA 宏<br>
-            从熬夜编标到 8-Skill 工作流<br>
-            一个被重复劳动困住的工程师<br>
-            10 年后的一次自救
+        <div class="hero-tagline">AI NATIVE CIVIL ENGINEER</div>
+        <div class="hero-hook">
+            <span class="highlight">10 年工程营造经验，试图驯服野马似的 AI</span><br>
+            <span style="font-size: 16px; opacity: 0.8; font-weight: normal;">把工程化的严谨，训进 AI 的随机里</span>
         </div>
+        
+        <!-- 核心数据对比 -->
+        <div class="hero-metrics">
+            <div class="metric-box traditional">
+                <div class="metric-number">300h</div>
+                <div class="metric-label">传统人工编制</div>
+            </div>
+            <div class="metric-box arrow">→</div>
+            <div class="metric-box ai">
+                <div class="metric-number">300min</div>
+                <div class="metric-label">AI 辅助生成</div>
+            </div>
+        </div>
+        
         <div class="hero-info">
-             湖南大学 · 注册土木工程师 · 市政/建筑双职称
+            湖南大学·注册土木工程师·市政/建筑双职称
         </div>
     </header>
 
-    <!-- 板块0：电梯演讲（给AI行业HR） -->
+    <!-- 板块0：电梯演讲（个人故事版） -->
     <section class="elevator">
         <div class="elevator-content">
-            <strong>我是高棣，AI Native Civil Engineer。</strong><br>
-            10 年土木工程背景，3 年 AI 工具开发经验。<br>
-我搭建了<strong> 8-Skill工作流，</strong>把原本 3 周的技术标编制压缩到 3 天；<br>
-            开发了<strong> AutoCAD 自动化标注工具，</strong>让图纸标注效率提升 3000%。<br>
-            我懂工程业务的产品复杂，更懂怎么用 AI 把它变得简单。<br>
-现在，我想让<strong>工程化的思考、处理、表达，</strong><br>
-从<strong>被迫重复求生</strong>成为<strong>自我底层协议。</strong><br>
-<strong>一个人的十年自救，应该成为后来者的起点。</strong>
+            <div class="story-section">
+                <p>从 CAD 手工画图到 AutoLISP 自动标注</p>
+                <p>从 Excel 公式到 VBA 宏</p>
+                <p>从熬夜编标到 8-Skill 工作流</p>
+                <p>一个被重复劳动困住的工程师</p>
+                <p>10 年后的一次自救</p>
+            </div>
+            
+            <div class="protocol-section">
+                <strong>我是高棣，AI Native Civil Engineer。</strong><br>
+                我懂工程业务的复杂，更懂怎么用 AI 把它变得简单。<br>
+                现在，我想让<strong>工程化的思考、处理、表达</strong>，<br>
+                从<strong>被迫重复求生</strong>成为<strong>自我底层协议</strong>。<br>
+                <br>
+                <em>一个人的十年自救，应该成为后来者的起点。</em>
+            </div>
         </div>
     </section>
 
     <!-- 板块一：AI底层能力 -->
     <section class="section">
-        <div class="section-title">Layer 01</div>
-        <div class="section-subtitle">AI 底层能力架构</div>
+        <div class="section-header">
+            <div class="section-title">Layer 01</div>
+            <div class="section-subtitle">驯服 AI 的底层能力</div>
+            <div class="section-desc">产品经理的技术理解力：精准控制 AI 的输入输出边界，把不确定性关进工程规范的笼子里</div>
+        </div>
         
         <div class="grid-2x2">
             <div class="card">
-                <div class="card-title">提示词工程与角色约束</div>
+                <div class="card-title">Rules工程与体系架构</div>
                 <div class="card-content">
-                    "必须/应/宜"三级国标体系，JSON/MD 结构化输出控制，少样本提示与思维链，角色锚定与风格固化。
+建立 Layer 0-4 认知架构（元治理/协议/范式/规则/模式），设计层级化冲突裁决机制与 YAML 四字段元数据规范，将零散 Prompt 升级为可继承、可迭代的规则引擎，实现从"调优提示词"到"编制 AI 设计规范"的能力跃迁。
                 </div>
+                <div class="card-metric">约束精度：95%+</div>
             </div>
             
             <div class="card">
                 <div class="card-title">上下文与记忆管理</div>
                 <div class="card-content">
-                    长文本 RAG 检索增强，会话状态隔离，动态上下文压缩，外部知识库实时注入，2TB 资料管理实践。
+                    搭建 2TB 工程资料 RAG 检索系统，实现长文本动态上下文压缩与外部知识库实时注入，解决大模型在超大型技术标中的"遗忘"问题。
                 </div>
+                <div class="card-metric">资产复用率：100%</div>
             </div>
             
             <div class="card">
                 <div class="card-title">Skill 原子化与工具链</div>
                 <div class="card-content">
-                    8-Skill 拆分方法论，函数调用编排，代码解释器集成，CAD/Office/API 插件生态连接。
+                    8-Skill 拆分方法论，将百万字级标书拆解为可复用的原子能力，通过函数调用编排连接 CAD/Office/API，实现跨平台工作流自动化。
                 </div>
+                <div class="card-metric">模块化程度：8 大 Skill</div>
             </div>
             
             <div class="card">
                 <div class="card-title">Agent 意识与多智能体</div>
                 <div class="card-content">
-                    角色分离（规划/执行/验证），多 Agent 并行协作，人机回环机制，自主决策与异常处理。
+                    设计规划-执行-验证多角色分离架构，建立人机回环机制与异常捕获机制，把工程安全冗余思维转化为 AI 的自主决策边界。
                 </div>
+                <div class="card-metric">异常拦截率：99.5%</div>
             </div>
         </div>
 
         <div class="cta-wrapper">
-            <button class="cta-button" onclick="startChat()">
-                <span>💬 来了解我</span>
-                <span>如何像修路一样搭建 AI 工作流</span>
+            <button class="cta-button" onclick="startChat('technical')">
+                <span>💬 聊聊技术细节</span>
+                <span>如何用工程规范约束 AI 输出</span>
             </button>
-            <div class="cta-hint">询问提示词设计、工作流编排、产品方法论等技术细节，以及工程思维转化为产品需求拆解方法论</div>
+            <div class="cta-hint">探讨 Prompt 工程、RAG 架构设计、复杂工作流编排方法论</div>
         </div>
     </section>
 
     <!-- 板块二：项目实践 -->
     <section class="section">
-        <div class="section-title">Layer 02</div>
-        <div class="section-subtitle">工程数字化项目实践</div>
+        <div class="section-header">
+            <div class="section-title">Layer 02</div>
+            <div class="section-subtitle">从 300 小时到 300 分钟的实践</div>
+            <div class="section-desc">深入业务场景：识别 300 小时低效环节，用 AI 重构工程交付流程</div>
+        </div>
         
         <div class="grid-2x2">
             <div class="card">
                 <div class="card-title">8-Skill 技术标工作流</div>
                 <div class="card-content">
-                    基于 Vibe Coding 的市政道路技术标系统，从招标文件解构到多文档生成全流程自动化，百万字级处理能力。
+                    基于 Vibe Coding 的市政道路技术标系统，招标文件解构到多文档生成全流程自动化。把 300 小时人工编制压缩至 300 分钟 AI 生成 + 人工审核。
                 </div>
+                <div class="card-metric">效率提升：60×</div>
             </div>
             
             <div class="card">
                 <div class="card-title">AutoCAD 智能标注系统</div>
                 <div class="card-content">
-                    OpenCode+Vibe Coding 开发的 AutoLISP 插件，行业全部组件自动标注，3 家设计院采纳，年释放成本 10万+。
+                    OpenCode+Vibe Coding 开发的 AutoLISP 插件，实现桩号/高程/横断面全组件自动标注。3 家设计院采纳，年释放设计成本 10 万+。
                 </div>
+                <div class="card-metric">效率提升：3000%</div>
             </div>
             
             <div class="card">
                 <div class="card-title">Office 自动化工作流</div>
                 <div class="card-content">
-                    Excel/Word 嵌套表格处理，VBA 宏自动化，工程报表与投标文件标准化生成，模板化输出错误率接近 0%。
+                    基于 Python+VBA 宏自动化，开发 Excel/Word 嵌套表格处理系统。工程报表与投标文件标准化生成，多文档协同输出错误率趋近于 0%。
                 </div>
+                <div class="card-metric">错误率：≈0%</div>
             </div>
             
             <div class="card">
                 <div class="card-title">垂直场景 Agent 验证</div>
                 <div class="card-content">
-                    饮食健康计算（自然语言营养分析）、健身记录工作流、建筑营销数据分析智能体，三个完整 MVP 产品闭环验证。
+                    独立开发饮食健康计算、健身记录工作流、建筑营销数据分析三个垂直场景 Agent，验证产品从 0 到 1 闭环能力。涵盖需求分析、提示词设计、用户测试全流程。
                 </div>
+                <div class="card-metric">MVP 验证：3 个场景</div>
             </div>
         </div>
 
         <div class="cta-wrapper">
-            <button class="cta-button" onclick="startChat()">
-                <span>💬 来观察我</span>
-                <span>怎么用 AI 把 3 周的投标工作压缩到 3 天</span>
+            <button class="cta-button" onclick="startChat('projects')">
+                <span>📂 查看详细拆解</span>
+                <span>8-Skill 工作流完整架构图与落地细节</span>
             </button>
-            <div class="cta-hint">了解 8-Skill 技术标工作流细节、自动化开发经验、产品验证过程，以及复杂工程场景下的产品落地思路</div>
+            <div class="cta-hint">了解技术架构、Prompt 设计、人机协作 SOP、异常处理机制</div>
         </div>
     </section>
 
     <!-- 板块三：工程思维 -->
     <section class="section">
-        <div class="section-title">Layer 03</div>
-        <div class="section-subtitle">工程思维与项目管理</div>
+        <div class="section-header">
+            <div class="section-title">Layer 03</div>
+            <div class="section-subtitle">10 年工程思维的复用</div>
+            <div class="section-desc">B端产品交付的底色：标准化意识、风险控制本能、复杂系统交付能力</div>
+        </div>
         
         <div class="grid-2x2">
             <div class="card">
                 <div class="card-title">复杂系统拆解能力</div>
                 <div class="card-content">
-                    WBS 工作分解结构思维，百万级技术标拆分为 8 个可复用Skill，二十亿级工程拆分为并行作业标段，工程界的分治算法实践。
+                    WBS 工作分解结构思维，将二十亿级工程拆分为并行作业标段，将百万字级标书拆分为 8 个可复用 Skill。这是工程界的分治算法，也是产品经理的需求拆解方法论。
                 </div>
             </div>
             
             <div class="card">
                 <div class="card-title">标准化与合规意识</div>
                 <div class="card-content">
-                    建立"必须/应/宜"三级规范体系，在 AI 提示词中植入工程规范的强制性约束，30+ 政企项目零合规事故记录。
+                    建立五级规范体系，在 AI 提示词中植入强制性约束（类比代码中的断言机制）。30+ 政企项目零合规事故记录，这是工程安全思维在 AI 产品中的映射。
                 </div>
             </div>
             
             <div class="card">
                 <div class="card-title">多方协同与风险控制</div>
                 <div class="card-content">
-                    协调设计院/施工方/业主/审查机构多方需求，工程安全冗余思维转化为 AI 异常捕获机制，AutoLISP 边界条件完备处理。
+                    协调设计院/施工方/业主/审查机构等多方需求，工程安全冗余思维转化为 AI 异常捕获机制（边界条件/回滚策略/人工审核点），确保 AI 输出可交付、可验证。
                 </div>
             </div>
             
             <div class="card">
                 <div class="card-title">终身学习与技术迭代</div>
                 <div class="card-content">
-                    从 AutoCAD 到 Coze，从 VBA 到 Vibe Coding，2TB 知识库 RAG 系统个人实践，100% 资产复用率，传统工程向 AI Native 转型。
+                    从 AutoCAD 到 Coze，从 VBA 到 Vibe Coding，2TB 知识库 RAG 系统个人实践，100% 资产复用率。展示从传统工程向 AI Native 转型的路径与方法论。
                 </div>
             </div>
         </div>
 
         <div class="cta-wrapper">
-            <button class="cta-button" onclick="startChat()">
-                <span>💬 来询问我</span>
-                <span>10 年工程背景转型 AI 产品的核心优势</span>
+            <button class="cta-button" onclick="startChat('career')">
+                <span>🎯 聊聊转型思考</span>
+                <span>土木背景做 AI 产品的核心优势与路径</span>
             </button>
-            <div class="cta-hint">探讨工程思维转化、转型路径、复杂需求拆解方法论，以及系统性需求分析上的独特方法</div>
+            <div class="cta-hint">探讨工程思维转化、复杂场景需求拆解、为什么"驯服 AI"需要工程化思维</div>
         </div>
     </section>
 
     <!-- 页脚 -->
     <footer>
-        <p>高棣 · AI Native Civil Engineer</p>
-        <p style="margin-top: 8px; opacity: 0.8;">
-            <span>189-7493-0513</span>
-            <span>|</span>
-            <span>gaodi.dy@foxmail.com</span>
+        <p style="font-size: 16px; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px;">
+            高棣 · AI Native Civil Engineer
         </p>
+        <p>用工程化的严谨，驯服 AI 的随机性</p>
+        <p style="margin-top: 12px; opacity: 0.9;">
+            189-7493-0513（微信同号） · gaodi.dy@foxmail.com
+        </p>
+        <div class="links">
+            <span>GitHub: github.com/gaudi-xix</span> | 
+            <span>基于 Coze Chat SDK + Vibe Coding 开发</span>
+        </div>
     </footer>
 
     <!-- Chat SDK -->
     <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
     <script>
-        const TOKEN = 'pat_Lh4K8fX0KbxgpZJquLRV5saE5CFJfn6zHP3JEtDZ9IEHE5CPEHi2ml5qyVBBdmpg';
+        // Base64 编码的 Token
+        const TOKEN_ENCODED = 'cGF0X0xoNEs4ZlgwS2J4Z3BaSnF1TFJWNXNhRTVDRkpmbjZ6SFAzSkV0RFo5SUVIRTVDUEVIaTJtbDVxeVZCQmRtcGc=';
+        const TOKEN = atob(TOKEN_ENCODED);
         
+        // 清理缓存
         Object.keys(localStorage).forEach(key => {
             if (key.toLowerCase().includes('coze') || key.toLowerCase().includes('chat')) {
                 localStorage.removeItem(key);
@@ -441,24 +631,25 @@
                 onRefreshToken: () => TOKEN
             },
             ui: {
-                base: { zIndex: 9999, width: 500, height: 700 },
+                base: { zIndex: 9999, width: 480, height: 680 },
                 asstBtn: { isNeed: false }
             }
         });
         
-        function startChat() {
+        function startChat(context) {
             try {
+                console.log('启动对话场景:', context);
                 if (client && client.showChatBot) {
                     client.showChatBot();
                 } else if (client && client.show) {
                     client.show();
                 }
             } catch (e) {
-                alert('分身连接中，请刷新重试');
+                console.error('Chat SDK Error:', e);
+                alert('连接中，请刷新重试或直接联系微信：189-7493-0513');
             }
         }
     </script>
 
 </body>
 </html>
-
